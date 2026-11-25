@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cozy Nest: Home Decor Ideas
 
-## Getting Started
+The website behind the [Cozy Nest Pinterest account](https://www.pinterest.com/cozyhomedecor_idea/).
+Pins link to posts here, and posts link to products on Etsy and Amazon.
 
-First, run the development server:
+## How it fits together
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+content/posts/*.mdx  ──►  /ideas/<slug>      the post page (static HTML)
+        │
+        └──────────────►  /pin/<slug>/<1|2|3> three 1000×1500 pin images per post
+                          /pins               private "pin studio" to grab them
+
+lib/affiliate.ts  turns <Product store="etsy" query="..."/> into a shop link,
+                  and adds affiliate tracking once the env vars are set
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js 16 (App Router) + Tailwind 4**, fully static: every page and pin image is built at deploy time.
+- **Posts are MDX files.** Adding a file = adding a post. Later, your automation publishes a post by committing one file to GitHub, and Vercel redeploys.
+- **Pin images are generated from each post's title** with `next/og`, so there's no design work per post.
+- **Affiliate links switch on with environment variables**, so approval day means no post edits.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Run it locally (PowerShell)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```powershell
+git clone https://github.com/Arun6408/cozy-nest-decor.git
+cd cozy-nest-decor
+npm install
+Copy-Item .env.example .env.local
+npm run dev
+```
 
-## Learn More
+Open http://localhost:3000. The pin studio is at http://localhost:3000/pins.
 
-To learn more about Next.js, take a look at the following resources:
+## Add a post
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Create `content/posts/your-post-slug.mdx` (the file name becomes the URL).
+2. Start it with frontmatter:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```mdx
+   ---
+   title: "15 Small Apartment Decor Ideas"
+   pinTitle: "15 Small Apartment Decor Ideas"   # optional, shorter text for pins
+   description: "One or two sentences for Google and Pinterest."
+   date: "2026-12-01"
+   category: "small-spaces"   # living-room | bedroom | wall-decor | small-spaces
+   ---
+   ```
 
-## Deploy on Vercel
+3. Write the body in Markdown. Available components:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```mdx
+   <Tip>A short styling tip.</Tip>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   <ShopGrid>
+   <Product store="etsy" name="Chunky knit throw" query="chunky knit throw blanket" note="Why it fits." />
+   <Product store="amazon" name="Jute rug" href="https://www.amazon.com/dp/XXXXXXXX" note="Why it fits." />
+   </ShopGrid>
+   ```
+
+   `query` links to a store search; `href` links to one exact product. Props must be plain strings.
+
+4. `git add . ; git commit -m "Add post" ; git push`. Vercel deploys automatically.
+
+## Environment variables
+
+See `.env.example`. Set them in Vercel → Project → Settings → Environment Variables, then redeploy.
+
+| Variable | When |
+| --- | --- |
+| `NEXT_PUBLIC_PINTEREST_VERIFY` | Claiming the site on Pinterest |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Before applying to affiliate programs |
+| `NEXT_PUBLIC_AWIN_AFFID`, `NEXT_PUBLIC_AWIN_ETSY_MID` | After Etsy (Awin) approves you |
+| `NEXT_PUBLIC_AMAZON_TAG` | After joining Amazon Associates |
+| `NEXT_PUBLIC_SITE_URL` | When you add a custom domain |
+
+## Rules baked into the code
+
+- Shop links go **directly** to Etsy/Amazon or Awin's official tracking link, never through our own redirect. Etsy bans masked redirects and Amazon bans cloaking.
+- Every shop link has `rel="sponsored nofollow"`.
+- Every post shows an affiliate disclosure at the top.
+- Pin images are our own designs, never seller listing photos (Etsy's Pinterest rule).

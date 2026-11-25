@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Tailwind CSS v4 runs as a Turbopack loader for every .css file
   turbopack: {
     rules: {
       "*.css": {
@@ -11,6 +9,12 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  // Posts and pin assets are read from disk at build time. These lines make
+  // sure Vercel also ships them with any server function that might need them.
+  outputFileTracingIncludes: {
+    "/pin/**": ["./assets/**/*", "./content/**/*"],
+    "/ideas/**": ["./content/**/*"],
   },
 };
 

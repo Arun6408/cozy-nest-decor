@@ -1,26 +1,68 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Brand palette pulled from the Cozy Nest emblem: cream walls, olive text,
+   warm wood and sage leaves. */
+@theme {
+  --color-cream: #f8f3ec;
+  --color-linen: #efe6da;
+  --color-sand: #e2d3bf;
+  --color-olive: #2f3b2c;
+  --color-sage: #6e7f5c;
+  --color-sage-light: #dfe4d4;
+  --color-wood: #9a6b47;
+  --color-ink: #2b2a26;
+  --color-muted: #6f6a60;
+
+  --font-serif: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  color: var(--color-olive);
+  letter-spacing: -0.01em;
+}
+
+/* Long-form post styling on top of @tailwindcss/typography */
+.prose-cozy {
+  --tw-prose-body: var(--color-ink);
+  --tw-prose-headings: var(--color-olive);
+  --tw-prose-links: var(--color-wood);
+  --tw-prose-bold: var(--color-olive);
+  --tw-prose-bullets: var(--color-sage);
+  --tw-prose-counters: var(--color-sage);
+  --tw-prose-quotes: var(--color-olive);
+  --tw-prose-quote-borders: var(--color-sand);
+  --tw-prose-hr: var(--color-sand);
+}
+
+.prose-cozy h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.9rem;
+  line-height: 1.2;
+  margin-top: 2.6em;
+}
+
+.prose-cozy h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.45rem;
+}
+
+.prose-cozy a {
+  text-underline-offset: 3px;
 }
