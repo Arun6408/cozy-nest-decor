@@ -16,15 +16,10 @@ export default function DisclosurePage() {
         are affiliate links. If you click one and make a purchase, we may earn a small commission at no extra cost to
         you. Commissions help keep this site running.
       </p>
-      <h2>Programs we participate in or are applying to</h2>
-      <ul>
-        <li>
-          <strong>Amazon Associates.</strong> As an Amazon Associate, {site.name} earns from qualifying purchases.
-        </li>
-        <li>
-          <strong>Etsy Affiliate Program</strong>, operated through the Awin network.
-        </li>
-      </ul>
+      <h2>Amazon Associates</h2>
+      <p>
+        <strong>As an Amazon Associate, {site.name} earns from qualifying purchases.</strong>
+      </p>
       <h2>Our promise</h2>
       <ul>
         <li>Posts that contain affiliate links say so at the top.</li>

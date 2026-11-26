@@ -1,7 +1,7 @@
 # Cozy Nest: Home Decor Ideas
 
 The website behind the [Cozy Nest Pinterest account](https://www.pinterest.com/cozyhomedecor_idea/).
-Pins link to posts here, and posts link to products on Etsy and Amazon.
+Pins link to posts here, and posts link to products on Amazon.
 
 ## How it fits together
 
@@ -43,7 +43,7 @@ Open http://localhost:3000. The pin studio is at http://localhost:3000/pins.
    pinTitle: "15 Small Apartment Decor Ideas"   # optional, shorter text for pins
    description: "One or two sentences for Google and Pinterest."
    date: "2026-12-01"
-   category: "small-spaces"   # living-room | bedroom | wall-decor | small-spaces
+   category: "small-spaces"   # living-room | bedroom | wall-decor | small-spaces | seasonal
    ---
    ```
 
@@ -53,7 +53,7 @@ Open http://localhost:3000. The pin studio is at http://localhost:3000/pins.
    <Tip>A short styling tip.</Tip>
 
    <ShopGrid>
-   <Product store="etsy" name="Chunky knit throw" query="chunky knit throw blanket" note="Why it fits." />
+   <Product store="amazon" name="Chunky knit throw" query="chunky knit throw blanket" note="Why it fits." />
    <Product store="amazon" name="Jute rug" href="https://www.amazon.com/dp/XXXXXXXX" note="Why it fits." />
    </ShopGrid>
    ```
@@ -70,13 +70,13 @@ See `.env.example`. Set them in Vercel → Project → Settings → Environment 
 | --- | --- |
 | `NEXT_PUBLIC_PINTEREST_VERIFY` | Claiming the site on Pinterest |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Before applying to affiliate programs |
-| `NEXT_PUBLIC_AWIN_AFFID`, `NEXT_PUBLIC_AWIN_ETSY_MID` | After Etsy (Awin) approves you |
+| `NEXT_PUBLIC_AWIN_AFFID`, `NEXT_PUBLIC_AWIN_ETSY_MID` | Optional: only if you join Etsy via Awin later |
 | `NEXT_PUBLIC_AMAZON_TAG` | After joining Amazon Associates |
 | `NEXT_PUBLIC_SITE_URL` | When you add a custom domain |
 
 ## Rules baked into the code
 
-- Shop links go **directly** to Etsy/Amazon or Awin's official tracking link, never through our own redirect. Etsy bans masked redirects and Amazon bans cloaking.
+- Shop links go **directly** to Amazon, never through our own redirect: Amazon bans link cloaking.
 - Every shop link has `rel="sponsored nofollow"`.
 - Every post shows an affiliate disclosure at the top.
-- Pin images are our own designs, never seller listing photos (Etsy's Pinterest rule).
+- Pin images are our own designs, never Amazon product photos.

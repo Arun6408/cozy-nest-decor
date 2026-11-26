@@ -19,8 +19,8 @@ export default function AboutPage() {
       <h2>How we choose what to feature</h2>
       <ul>
         <li>Ideas first: every post starts with a styling idea you can use even if you buy nothing.</li>
-        <li>Small makers: we love handmade and vintage pieces from independent Etsy shops.</li>
-        <li>Practical basics: for everyday items we point to widely available options on Amazon.</li>
+        <li>Easy to get: we link to widely available options on Amazon, so you can order what you like quickly.</li>
+        <li>Texture over trends: we favour natural materials and pieces that last beyond one season.</li>
         <li>No paid placements: brands don&apos;t pay to appear in our posts.</li>
       </ul>
       <h2>How this site is funded</h2>

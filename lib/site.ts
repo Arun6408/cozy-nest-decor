@@ -14,7 +14,7 @@ export const site = {
   name: "Cozy Nest",
   tagline: "Home Decor Ideas",
   description:
-    "Affordable home decor ideas for cozy living rooms, calm bedrooms and small spaces, with handpicked finds from Etsy and Amazon.",
+    "Affordable home decor ideas for cozy living rooms, calm bedrooms and small spaces, with handpicked finds from Amazon.",
   url: resolveSiteUrl(),
   pinterest: {
     username: "cozyhomedecor_idea",
@@ -30,6 +30,7 @@ export const categories = {
   bedroom: { title: "Bedroom", blurb: "Calm, restful bedrooms on a realistic budget." },
   "wall-decor": { title: "Wall Decor", blurb: "Art, mirrors and shelves that make bare walls feel finished." },
   "small-spaces": { title: "Small Spaces", blurb: "Renter-friendly ideas for apartments and tiny rooms." },
+  seasonal: { title: "Seasonal", blurb: "Holiday and seasonal refreshes, planned ahead." },
 } as const;
 
 export type CategorySlug = keyof typeof categories;

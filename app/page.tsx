@@ -18,7 +18,7 @@ export default function HomePage() {
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
               Simple, affordable decor ideas for cozy living rooms, calm bedrooms and small spaces, with handpicked
-              finds from small makers on Etsy and everyday basics on Amazon.
+              finds you can order on Amazon.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/ideas" className="rounded-full bg-olive px-6 py-3 text-sm font-medium text-cream hover:bg-wood">
@@ -48,7 +48,7 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-6xl px-5 pt-14">
         <h2 className="font-serif text-3xl font-semibold">Shop by room</h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {Object.entries(categories).map(([slug, c]) => (
             <Link
               key={slug}

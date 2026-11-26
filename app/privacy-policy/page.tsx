@@ -27,8 +27,8 @@ export default function PrivacyPage() {
       </ul>
       <h2>Affiliate links and third-party cookies</h2>
       <p>
-        When you click an affiliate link to Amazon or Etsy (via the Awin network), that retailer or network may set
-        cookies in your browser to record that you came from our site. Their own privacy policies govern that data.
+        When you click an affiliate link to Amazon, Amazon may set
+        cookies in your browser to record that you came from our site. Amazon&apos;s own privacy policy governs that data.
       </p>
       <h2>Pinterest</h2>
       <p>
