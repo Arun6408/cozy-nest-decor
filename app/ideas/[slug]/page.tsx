@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { Disclosure, Product, ShopGrid, Tip } from "@/components/mdx";
 import { PostCard } from "@/components/PostCard";
-import { getAllPosts, getPost } from "@/lib/posts";
+import { getAllPosts, getPost, getPostPinImages } from "@/lib/posts";
 import { categories, site } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -62,7 +62,8 @@ export default async function PostPage({ params }: PageProps<"/ideas/[slug]">) {
   });
 
   const pageUrl = `${site.url}/ideas/${post.slug}`;
-  const pinImage = `${site.url}${post.cover ?? `/pin/${post.slug}`}`;
+  const aiPin = getPostPinImages(post.slug)[0];
+  const pinImage = `${site.url}${aiPin ?? post.cover ?? `/pin/${post.slug}`}`;
   const saveToPinterest = `https://www.pinterest.com/pin/create/button/?${new URLSearchParams({
     url: pageUrl,
     media: pinImage,

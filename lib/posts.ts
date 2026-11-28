@@ -64,3 +64,14 @@ export const getAllPosts = cache((): PostMeta[] => {
 export function getPostsByCategory(category: CategorySlug): PostMeta[] {
   return getAllPosts().filter((p) => p.category === category);
 }
+
+// AI-made pin images saved by the pin pipeline: public/images/<slug>/pin-1.jpg, pin-2.jpg ...
+export function getPostPinImages(slug: string): string[] {
+  const dir = path.join(process.cwd(), "public", "images", slug);
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter((f) => /^pin-\d+\.(jpg|jpeg|png|webp)$/.test(f))
+    .sort((a, b) => Number(a.match(/\d+/)![0]) - Number(b.match(/\d+/)![0]))
+    .map((f) => `/images/${slug}/${f}`);
+}

@@ -35,8 +35,12 @@ export function shopLink(input: ShopLinkInput): string {
 
   if (input.store === "amazon" && AMAZON_TAG) {
     const u = new URL(url);
-    u.searchParams.set("tag", AMAZON_TAG);
-    return u.toString();
+    // Short links from SiteStripe (amzn.to, link.amazon, a.co) already carry
+    // your tag; only add it to full amazon.com URLs.
+    if (/(^|\.)amazon\.com$/.test(u.hostname)) {
+      u.searchParams.set("tag", AMAZON_TAG);
+      return u.toString();
+    }
   }
 
   if (input.store === "etsy" && AWIN_AFFID && AWIN_ETSY_MID) {
